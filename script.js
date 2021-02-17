@@ -19,9 +19,10 @@ addBookButton.addEventListener("click",() => {addBookToLibrary(), displayBooks()
 displayCase.addEventListener('click', event => {
     let target = event.target;
     if(target.className == 'delete'){
+       removeBookFromLibrary(myLibrary, target.parentNode.id);
        displayCase.removeChild(target.parentNode)
-       removeBookFromLibrary(myLibrary, target.id);
-       displayBooks();
+
+//       displayBooks();
     };
     
     if(target.className == 'markRead'){
@@ -66,7 +67,7 @@ function displayBooks(){ // this one should display the books, but oops it accid
     for (i in myLibrary){
         let newBook = document.createElement('div')
         
-//myLibrary[i] = newBook.id = i
+        newBook.id = i
 //myLibrary[i].shelfSpot = i
         newBook.innerHTML = 
             `
