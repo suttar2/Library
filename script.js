@@ -1,9 +1,4 @@
-function Book(name, author, pages, read){ //Let's define a new class of object to populate our library array
-    this.name = name
-    this.author = author
-    this.pages = pages
-    this.read = read
-};
+
 
 let myLibrary = [];
 
@@ -18,11 +13,12 @@ const markButtons = document.getElementsByClassName("markRead") //grab those del
 addBookButton.addEventListener("click",() => {addBookToLibrary(), displayBooks()}); // let's listen on that addBookButton
 displayCase.addEventListener('click', event => {
     let target = event.target;
+    
     if(target.className == 'delete'){
        removeBookFromLibrary(myLibrary, target.parentNode.id);
        displayCase.removeChild(target.parentNode)
 
-//       displayBooks();
+       displayBooks();
     };
     
     if(target.className == 'markRead'){
@@ -35,8 +31,14 @@ displayCase.addEventListener('click', event => {
 
 testButton.addEventListener("click",() => (console.table(myLibrary)));
 
+function Book(name, author, pages, read){ //Let's define a new class of object to populate our library array
+    this.name = name
+    this.author = author
+    this.pages = pages
+    this.read = read
+};
 
-function addBookToLibrary(){ //We need a function to put new books into our library, here it is. It pushes info from the fields into a new book
+function addBookToLibrary(){ //We need a function to put new books into our library, here it is. It pushes info from the entry fields into a new book
     myLibrary.push(
 
         new Book(
@@ -54,38 +56,32 @@ function addBookToLibrary(){ //We need a function to put new books into our libr
 };
 
 function removeBookFromLibrary(someArray, anIndex){
-    someArray.splice(
-        anIndex, // item at index 0
-        1 // remove one item
-    )
-}
+    someArray.splice( anIndex, 1);
+};
 
 function displayBooks(){ // this one should display the books, but oops it accidentally loops through and displays them all every time we hit the button... so lets just make a new list every time
     
-    while (displayCase.firstChild) {displayCase.removeChild(displayCase.firstChild)};
+    while (displayCase.firstChild) {displayCase.removeChild(displayCase.firstChild)}; //when called, while there are items on the dom. Delete them all first
 
-    for (i in myLibrary){
+    for (i in myLibrary){ // for each item in this array, make a new dom element for it, give it an id of it's array index and give it some inner html that relates to its content
         let newBook = document.createElement('div')
-        
-        newBook.id = i
-//myLibrary[i].shelfSpot = i
-        newBook.innerHTML = 
-            `
-            <br>
-            Title : ${myLibrary[i].name}
-            <br>
-            Author : ${myLibrary[i].author}
-            <br>
-            Pages : ${myLibrary[i].pages}
-            <br>
-            Read : ${myLibrary[i].read}
-            <br>
-            <button class= "delete"> delete ${myLibrary[i].name} </button>
-            <br>
-            <button class= "markRead"> Toggle Read Status</button>
-            `
-
-        displayCase.appendChild(newBook);
+            newBook.id = i
+            newBook.innerHTML = 
+                `
+                <br>
+                Title : ${myLibrary[i].name}
+                <br>
+                Author : ${myLibrary[i].author}
+                <br>
+                Pages : ${myLibrary[i].pages}
+                <br>
+                Read : ${myLibrary[i].read}
+                <br>
+                <button class= "delete"> delete ${myLibrary[i].name} </button>
+                <br>
+                <button class= "markRead"> Toggle Read Status</button>
+                `
+        displayCase.appendChild(newBook); // append each of these to the dom
     }
 };
 
