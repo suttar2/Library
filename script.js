@@ -1,14 +1,10 @@
 
-
 let myLibrary = [];
 
-const testButton = document.getElementById("testButton");
 const displayCase = document.getElementById("displayCase"); //Let's grab a new box called display case with our tentacles
 const addBookButton = document.getElementById("addBook"); // let's also grab a button called addBook
 const deleteButtons = document.getElementsByClassName("delete") //grab those delete buttons
 const markButtons = document.getElementsByClassName("markRead") //grab those delete buttons
-
-
 
 addBookButton.addEventListener("click",() => {addBookToLibrary(), displayBooks()}); // let's listen on that addBookButton
 displayCase.addEventListener('click', event => {
@@ -23,13 +19,13 @@ displayCase.addEventListener('click', event => {
     
     if(target.className == 'markRead'){
         myLibrary[target.parentNode.id].read = !myLibrary[target.parentNode.id].read
-        console.log(`${myLibrary[target.parentNode.id].read}`)
         displayBooks();
     };
 });
 
-
-testButton.addEventListener("click",() => (console.table(myLibrary)));
+//Below is the test Button for library array data
+//testButton.addEventListener("click",() => (console.table(myLibrary)));
+//const testButton = document.getElementById("testButton");
 
 function Book(name, author, pages, read){ //Let's define a new class of object to populate our library array
     this.name = name
