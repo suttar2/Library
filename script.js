@@ -11,6 +11,7 @@ const testButton = document.getElementById("testButton");
 const displayCase = document.getElementById("displayCase"); //Let's grab a new box called display case with our tentacles
 const addBookButton = document.getElementById("addBook"); // let's also grab a button called addBook
 const deleteButtons = document.getElementsByClassName("delete") //grab those delete buttons
+const markButtons = document.getElementsByClassName("markRead") //grab those delete buttons
 
 
 
@@ -18,13 +19,20 @@ addBookButton.addEventListener("click",() => {addBookToLibrary(), displayBooks()
 displayCase.addEventListener('click', event => {
     let target = event.target;
     if(target.className == 'delete'){
-       removeBookFromLibrary(myLibrary, target.id);
        displayCase.removeChild(target.parentNode)
-    }
+       removeBookFromLibrary(myLibrary, target.id);
+       displayBooks();
+    };
+    
+    if(target.className == 'markRead'){
+        myLibrary[target.parentNode.id].read = !myLibrary[target.parentNode.id].read
+        console.log(`${myLibrary[target.parentNode.id].read}`)
+        displayBooks();
+    };
 });
 
 
-testButton.addEventListener("click",() => console.log('cooltestbro'));
+testButton.addEventListener("click",() => (console.table(myLibrary)));
 
 
 function addBookToLibrary(){ //We need a function to put new books into our library, here it is. It pushes info from the fields into a new book
@@ -58,7 +66,8 @@ function displayBooks(){ // this one should display the books, but oops it accid
     for (i in myLibrary){
         let newBook = document.createElement('div')
         
-        newBook.id = myLibrary[i].name;
+//myLibrary[i] = newBook.id = i
+//myLibrary[i].shelfSpot = i
         newBook.innerHTML = 
             `
             <br>
@@ -70,15 +79,14 @@ function displayBooks(){ // this one should display the books, but oops it accid
             <br>
             Read : ${myLibrary[i].read}
             <br>
-            <button class= "delete" id="${myLibrary[i].name}"> delete ${myLibrary[i].name} </button
+            <button class= "delete"> delete ${myLibrary[i].name} </button>
+            <br>
+            <button class= "markRead"> Toggle Read Status</button>
             `
 
         displayCase.appendChild(newBook);
     }
 };
-
-
-
 
 
 // 2/11/21
