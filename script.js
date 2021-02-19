@@ -1,10 +1,10 @@
 
-let myLibrary = [];
+const myLibrary = [];
 
 const displayCase = document.getElementById("displayCase"); //Let's grab a new box called display case with our tentacles
 const addBookButton = document.getElementById("addBook"); // let's also grab a button called addBook
-const deleteButtons = document.getElementsByClassName("delete") //grab those delete buttons
-const markButtons = document.getElementsByClassName("markRead") //grab those delete buttons
+// const deleteButtons = document.getElementsByClassName("delete") //grab those delete buttons
+// const markButtons = document.getElementsByClassName("markRead") //grab those delete buttons
 
 addBookButton.addEventListener("click",() => {addBookToLibrary(), displayBooks()}); // let's listen on that addBookButton
 displayCase.addEventListener('click', event => {
