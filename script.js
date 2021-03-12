@@ -26,24 +26,29 @@ displayCase.addEventListener('click', event => {
 //Below is the test Button for library array data
 //testButton.addEventListener("click",() => (console.table(myLibrary)));
 //const testButton = document.getElementById("testButton");
-
-function Book(name, author, pages, read){ //Let's define a new class of object to populate our library array
+class Book{
+    constructor(name, author, pages, read){
     this.name = name
     this.author = author
     this.pages = pages
     this.read = read
-};
+    }
+}
+// function Book(name, author, pages, read){ //Let's define a new class of object to populate our library array
+//     this.name = name
+//     this.author = author
+//     this.pages = pages
+//     this.read = read
+// };
 
 function addBookToLibrary(){ //We need a function to put new books into our library, here it is. It pushes info from the entry fields into a new book
-    myLibrary.push(
-
-        new Book(
-            document.getElementById('title').value,
-            document.getElementById('author').value,
-            document.getElementById('pages').value,
-            document.getElementById('read').checked
-            )
-    )
+    let title = document.getElementById('title').value
+    let author = document.getElementById('author').value
+    let pages = document.getElementById('pages').value
+    let read = document.getElementById('read').checked
+    
+    myLibrary.push(new Book(title, author, pages, read))
+    
     document.getElementById('title').value = null,
     document.getElementById('author').value = null,
     document.getElementById('pages').value = null,
